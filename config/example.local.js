@@ -91,8 +91,7 @@ module.exports = {
    * DEVICE and DIR directives are automatically replaced by the app.        **
    ***************************************************************************/
 
-    scanList: 'scanimage -f %d%n',
-    scanName: 'scanimage -f %m%n',
+    scanList: 'scanimage -f %d\\;%m%n',
     scanSave: 'scanimage --device=DEVICE --format=png > DIR'
 
 };

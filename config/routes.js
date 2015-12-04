@@ -32,9 +32,9 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': {
-    view: 'homepage'
-  }
+  '/': 'HomeController.index',
+  '/scanner/list': 'ScannerController.get',
+  '/scanner/scan': 'ScannerController.scan'
 
   /***************************************************************************
   *                                                                          *

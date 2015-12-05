@@ -14,7 +14,9 @@ var paths = {
     'js': './.tmp/public/js/',
     'fonts': './.tmp/public/fonts/',
     'jquery': './node_modules/jquery/',
-    'bootstrap': './node_modules/bootstrap-sass/assets/'
+    'bootstrap': './node_modules/bootstrap-sass/assets/',
+    'fontawesome': './node_modules/font-awesome/',
+    'masonry': './node_modules/masonry-layout/'
 }
 
 gulp.task('clean', function() {
@@ -27,6 +29,7 @@ gulp.task('clean', function() {
 
 gulp.task('copy', function () {
     gulp.src([paths.bootstrap + 'fonts/**']).pipe(gulp.dest(paths.fonts));
+    gulp.src([paths.fontawesome + 'fonts/**']).pipe(gulp.dest(paths.fonts));
 });
 
 gulp.task('sass', function () {
@@ -40,6 +43,7 @@ gulp.task('scripts', function() {
     gulp.src([
         paths.jquery + "dist/jquery.js",
         paths.bootstrap + "javascripts/bootstrap.js",
+        paths.masonry + "dist/masonry.pkgd.js",
         paths.ajs + "home.js",
     ]).pipe(concat('app.js'))
       .pipe(uglify())

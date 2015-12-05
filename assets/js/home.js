@@ -1,5 +1,18 @@
+var scanUpdate = function() {
+    $('#scanheader').html('Scans <small>Click to Download</small>');
+};
+
 var addScan = function(scan) {
-    console.log(scan);
+    link = $('<a>', {
+        href: scan.name,
+        download: 'Scanned-Document.png',
+        title: 'ScannedDocument'
+    });
+    link.append($('<img>', {
+        src: scan.name,
+        class: 'grid-item scan col-xs-12 col-md-4'
+    }));
+    $('.grid').prepend(link);
 };
 
 var getScans = function(url) {
@@ -7,7 +20,14 @@ var getScans = function(url) {
         data.forEach(function(scan) {
             addScan(scan);
         });
+        scanUpdate();
     });
+};
+
+var scannerUpdate = function() {
+    $('#scan').addClass('btn-success');
+    $('#scan').removeClass('btn-danger');
+    $('#scannerheader').html('Scanners');
 };
 
 var addScanner = function(scanner) {
@@ -35,10 +55,18 @@ var getScanners = function(url) {
         data['scanners'].forEach(function(scanner) {
             addScanner(scanner);
         });
+        scannerUpdate();
     });
 };
 
-var main = function(getURL, sendURL) {
+var main = function(getURL, sendURL, scanURL) {
+    // Get scans
+    getScans(scanURL);
+    $('.grid').masonry({
+        itemSelector: '.grid-item',
+        columnWidth: 200
+    });
+    // Get scanners
     getScanners(getURL);
     $("#scan").click(function(){
         $.post(sendURL, {scanner: $('#scanners').val()}).done(function (data) {
@@ -52,4 +80,7 @@ var main = function(getURL, sendURL) {
     });
 };
 
-main($('#scanners').data('url'), $('#scan').data('url'))
+$(document).ready(function() {
+    $('body').addClass('background');
+    main($('#scanners').data('url'), $('#scan').data('url'), $('.grid').data('url'));
+});

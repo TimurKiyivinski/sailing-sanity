@@ -2,19 +2,21 @@
 <div class="container">
     <div class="row">
         <div class="page-header">
-            <h2>Scanners</h2>
+            <h2 id="scannerheader">Scanners <small><i class="fa fa-spinner fa-spin"></i></small></h2>
         </div>
         <div class="col-xs-12 col-md-6">
             <select id="scanners" class="form-control" data-url="<%= sails.getBaseurl() + '/scanner/get' %>">
             </select>
         </div>
         <div class="col-xs-12 col-md-6">
-            <a id="scan" class="btn btn-primary col-xs-12" type="button" data-url="<%= sails.getBaseurl() + '/scanner/scan' %>">Scan</a>
+            <a id="scan" class="btn btn-danger col-xs-12" type="button" data-url="<%= sails.getBaseurl() + '/scanner/scan' %>">Scan</a>
         </div>
     </div>
     <div class="row">
         <div class="page-header">
-            <h2>Scans</h2>
+            <h2 id="scanheader">Scans</h2>
+        </div>
+        <div class="grid" data-url="<%= sails.getBaseurl() + '/scan' %>">
         </div>
     </div>
 </div>

@@ -1,1 +1,58 @@
+// Bootstrap theme
+$brand-primary: #14acc2;
+$brand-success: #0c8da0;
+$brand-info: #8adae6;
+$brand-warning: #a0450c;
+$brand-danger: #c11316;
+
+// Import libraries
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "node_modules/font-awesome/scss/font-awesome";
+
+.scan {
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 1s ease;
+}
+
+.scan:hover {
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+
+.background {
+    // Created using http://www.gradient-animator.com/
+    background: linear-gradient(226deg, #1b6b56, #0ea37b, #2c997c, #296d5b);
+    background-size: 800vh 800vw;
+
+    -webkit-animation: AnimationName 10s ease infinite;
+    -moz-animation: AnimationName 10s ease infinite;
+    animation: AnimationName 10s ease infinite;
+
+    @-webkit-keyframes AnimationName {
+        0%{background-position:10% 50%}
+        25%{background-position:40% 60%}
+        50%{background-position:50% 70%}
+        75%{background-position:60% 80%}
+        100%{background-position:70% 90%}
+    }
+    @-moz-keyframes AnimationName {
+        0%{background-position:10% 50%}
+        25%{background-position:40% 60%}
+        50%{background-position:50% 70%}
+        75%{background-position:60% 80%}
+        100%{background-position:70% 90%}
+    }
+    @keyframes AnimationName {
+        0%{background-position:10% 50%}
+        25%{background-position:40% 60%}
+        50%{background-position:50% 70%}
+        75%{background-position:60% 80%}
+        100%{background-position:70% 90%}
+    }
+}

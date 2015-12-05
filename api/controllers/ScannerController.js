@@ -25,17 +25,39 @@ module.exports = {
    */
   scan: function (req, res) {
     scanner = req.param('scanner');
-    console.log(scanner);
     if (typeof scanner === "undefined") {
         return res.json({
             success: false
         });
     };
-    scanDir = Math.floor(Math.random() * 100).toString() + " " +  Date();
+    // Format save directory
+    date = new Date();
+    dateStr = date.getTime() + '.' + date.getDate();
+    scanDir = '.tmp/public/images/' + Math.floor(Math.random() * 100).toString() + '.' + dateStr + '.png';
+    // Format command string
+    scanCommand = sails.config.scanSave;
+    scanCommand = scanCommand.replace("DEVICE", scanner);
+    scanCommand = scanCommand.replace("DIR", scanDir);
+    // Create directory
+    try {
+        exec('mkdir .tmp/public/images').toString().split('\n');
+    }
+    catch (e) {
+        // I like to keep code dirty ;)
+    }
+    // Attempt scanning
+    try {
+        exec(scanCommand);
+    }
+    catch (e) {
+        return res.json({
+            success: false
+        });
+    }
     return res.json({
         success: true,
         dir: scanDir,
-        param: scanner
+        command: scanCommand,
     });
   }
 };

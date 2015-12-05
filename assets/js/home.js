@@ -72,6 +72,7 @@ var main = function(getURL, sendURL, scanURL) {
         $.post(sendURL, {scanner: $('#scanners').val()}).done(function (data) {
             if (data.success) {
                 console.log('Scan was successful.');
+                print(data);
             }
             else {
                 console.log('Scanning failed.');

@@ -2,6 +2,12 @@ var scanUpdate = function() {
     $('#scanheader').html('Scans <small>Click to Download</small>');
 };
 
+var createScan = function(sendURL, scanName) {
+    $.post(sendURL, {name: scanName}).done(function (data) {
+        console.log('Added scanner');
+    });
+}
+
 var addScan = function(scan) {
     link = $('<a>', {
         href: scan.name,
@@ -59,7 +65,7 @@ var getScanners = function(url) {
     });
 };
 
-var main = function(getURL, sendURL, scanURL) {
+var main = function(getURL, sendURL, scanURL, createURL) {
     // Get scans
     getScans(scanURL);
     $('.grid').masonry({
@@ -72,7 +78,8 @@ var main = function(getURL, sendURL, scanURL) {
         $.post(sendURL, {scanner: $('#scanners').val()}).done(function (data) {
             if (data.success) {
                 console.log('Scan was successful.');
-                print(data);
+                createScan(createURL, data.name);
+                addScan(data);
             }
             else {
                 console.log('Scanning failed.');
@@ -83,5 +90,9 @@ var main = function(getURL, sendURL, scanURL) {
 
 $(document).ready(function() {
     $('body').addClass('background');
-    main($('#scanners').data('url'), $('#scan').data('url'), $('.grid').data('url'));
+    main($('#scanners').data('url'),
+         $('#scan').data('url'),
+         $('.grid').data('url'),
+         $('.grid').data('create')
+    );
 });

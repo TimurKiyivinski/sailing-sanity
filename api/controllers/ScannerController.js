@@ -56,7 +56,7 @@ module.exports = {
     }
     return res.json({
         success: true,
-        dir: scanDir,
+        name: scanDir.replace('.tmp/public/', ''),
         command: scanCommand,
     });
   }

@@ -8,7 +8,7 @@ var createScan = function(sendURL, scanName) {
     });
 }
 
-var addScan = function(scan) {
+var addScan = function(scan, url) {
     link = $('<a>', {
         href: scan.name,
         download: 'Scanned-Document.png',
@@ -16,15 +16,29 @@ var addScan = function(scan) {
     });
     link.append($('<img>', {
         src: scan.name,
-        class: 'grid-item scan col-xs-12 col-md-4'
+        class: 'col-xs-12 scan'
     }));
-    $('.grid').prepend(link);
+    container = $('#template').clone();
+    container.attr('id', 'scan-' + scan.id);
+    container.removeClass('hidden');
+    container.prepend(link);
+    imgDelete = container.children('.img-delete');
+    imgDelete.click(function() {
+        $.ajax({
+            url: url + scan.id,
+            type: 'DELETE',
+            success: function () {
+                $('#scan-' + scan.id).remove();
+            }
+        });
+    });
+    $('.grid').prepend(container);
 };
 
 var getScans = function(url) {
     var scans = $.get(url, function(data) {
         data.forEach(function(scan) {
-            addScan(scan);
+            addScan(scan, url);
         });
         scanUpdate();
     });
